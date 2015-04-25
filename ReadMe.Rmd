@@ -157,7 +157,7 @@ acts[order(acts$ActivityName),]
 
 Because my ReadFiles function, retained column names from the data when they were read, the requirements of this step were already met.
 
-The note in the (Discussion Form)[https://class.coursera.org/getdata-013/forum/thread?thread_id=30] confirms this. Under the question, "Is step 4 the same as step 3", the answer indicates:
+The note in the [Discussion Form](https://class.coursera.org/getdata-013/forum/thread?thread_id=30) confirms this. Under the question, "Is step 4 the same as step 3", the answer indicates:
     
     *the variable names (which at the moment are V1, V2, etc*  
     
@@ -225,6 +225,7 @@ Thus we see that the resulting tidy data set has 180 observations of 68 variable
 
 The final data set is saved in project directory as tidy.txt.  
 
+Here is a link to the [code book](./CodeBook.html)
 
 Thanks for your attention!  
 Bob Weiner

@@ -163,7 +163,7 @@ length(df)</code></pre>
 <h3>Adding Descriptive Activity Names</h3>
 <p>Currently all Activities are described by the column ‘y’.</p>
 <pre class="r"><code>sample (df.extracted$y, 20, replace=FALSE)</code></pre>
-<pre><code>##  [1] 1 4 5 6 5 5 6 4 1 6 2 6 4 5 6 2 1 5 2 5</code></pre>
+<pre><code>##  [1] 6 5 1 2 1 1 6 4 2 5 3 6 4 5 6 6 1 2 5 2</code></pre>
 <p>which is not very useful. These however can be mapped to the table of values in activity_labels.txt. This is done with the function:</p>
 <pre class="r"><code>AddActivityNames &lt;- function(data) {
     
@@ -190,11 +190,11 @@ acts[order(acts$ActivityName),]</code></pre>
 <div id="labeling-with-appropriate-variable-names" class="section level3">
 <h3>Labeling with Appropriate Variable Names</h3>
 <p>Because my ReadFiles function, retained column names from the data when they were read, the requirements of this step were already met.</p>
-<p>The note in the (Discussion Form)[<a href="https://class.coursera.org/getdata-013/forum/thread?thread_id=30" class="uri">https://class.coursera.org/getdata-013/forum/thread?thread_id=30</a>] confirms this. Under the question, “Is step 4 the same as step 3”, the answer indicates:</p>
+<p>The note in the <a href="https://class.coursera.org/getdata-013/forum/thread?thread_id=30">Discussion Form</a> confirms this. Under the question, “Is step 4 the same as step 3”, the answer indicates:</p>
 <pre><code>*the variable names (which at the moment are V1, V2, etc*  </code></pre>
 <p>but my variable names are come directly from the features.txt file. Here is a sample:</p>
 <ul>
-<li>fBodyAcc.std…Y, fBodyGyro.std…X, tGravityAcc.std…X, fBodyAccJerk.std…Z, tBodyGyroJerk.mean…Z *</li>
+<li>tBodyGyro.std…Y, fBodyGyro.std…Z, subject, tBodyGyroJerk.std…Z, tBodyAcc.mean…Z *</li>
 </ul>
 </div>
 <div id="creating-the-independent-tidy-data-set-of-averages" class="section level3">
@@ -268,10 +268,9 @@ head(df.tidy[1:5], 10)</code></pre>
 ##  $ tBodyAcc.mean...Y: num  -0.04051 -0.00131 -0.01614 -0.01738 -0.00992 ...
 ##  $ tBodyAcc.mean...Z: num  -0.113 -0.105 -0.111 -0.111 -0.108 ...</code></pre>
 <p>Thus we see that the resulting tidy data set has 180 observations of 68 variables (including the identifiers, ActivityName, and subject).</p>
-<p>The final data set is saved in project data directory as tidy.Rda. You can load this with</p>
-<pre class="r"><code>    load(file = FullFileName('tidy.Rda'))</code></pre>
-<p>Thanks for your attention!</p>
-<p>Bob Weiner</p>
+<p>The final data set is saved in project directory as tidy.txt.</p>
+<p>Here is a link to the <a href="./CodeBook.html">code book</a></p>
+<p>Thanks for your attention!<br />Bob Weiner</p>
 </div>
 
 
