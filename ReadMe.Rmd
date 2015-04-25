@@ -225,7 +225,7 @@ Thus we see that the resulting tidy data set has 180 observations of 68 variable
 
 The final data set is saved in project directory as tidy.txt.  
 
-Here is a link to the [code book](./CodeBook.html)
+Here is a link to the [code book](http://htmlpreview.github.io/?https://github.com/BobWeinerJr/GettingAndCleaning-Project/blob/master/CodeBook.html)
 
 Thanks for your attention!  
 Bob Weiner
