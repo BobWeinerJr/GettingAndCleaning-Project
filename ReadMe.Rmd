@@ -1,0 +1,235 @@
+---
+title: "Getting & Cleaning Project"
+author: "Bob Weiner"
+date: "Saturday, April 25, 2015"
+output: html_document
+---
+
+###Introduction
+Getting and Cleaning the data for the UCI HAR Dataset involved a number of steps, each of which is described in this document.
+
+The run_analysis.R file contains all the functions needed to load, merge, extract, label, and calculate all the data in the UCI HAR Dataset.
+
+This file must be executed from the in the UCI HAR Dataset root level directory and that all the datafiles are available as they are in the original dataset.
+
+If you plan on executing this code, you must adjust the following line in the top of run_analysis.R
+
+```{r echo=FALSE, results='hide'}
+dataDirPath = 'C:/Users/bob/Documents/Dropbox/School/Coursera/Getting and Cleaning Data/Project/UCI HAR Dataset'
+```
+
+This is used by the helper function, FullFileName, to resolve filenames throughout the code.
+
+```{r}
+FullFileName <- function(filename) {
+    dataDir = dataDirPath
+    paste (dataDirPath, filename, sep='/')
+}
+
+```
+
+###Merging the Training and Test Sets
+
+Reading and merging the training and test sets is accomplished by calling a single function, ReadTestAndTraining().  This however, relies on two helper functions.
+
+```{r results='hide'}
+ReadTestAndTraining <- function() {
+  
+    df.test = ReadData('test')
+    df.train = ReadData('train')
+    
+    rbind(df.test, df.train)
+}
+```
+
+The first of these is the ReadData function which reads all required data from either the test or train directories.  This function returns a data frame containing the data from that particular directory.
+
+
+```{r results='hide'}
+ReadData <- function (testSet) {
+    
+    # input validation
+    if (testSet != "test" & 
+            testSet != "train") {
+        stop("testSet must be 'test' or 'train'")
+    }
+    
+    features <- read.table(FullFileName('features.txt'),
+                           colClasses = c('numeric', 'character'),
+                           col.names = c('Id', 'Feature'))
+    
+    # Read data in root directory
+    subject <- ReadFiles(testSet, 'subject')
+    X <- ReadFiles(testSet, 'X', features$Feature)
+    y <- ReadFiles(testSet, 'y')
+    
+    cbind(subject, X, y)
+}
+```
+
+
+The second help function, ReadFiles, is called from the above code.  It's purpose is to read a single file and return a data frame containing numeric columns and appropriately labeled variable names.
+
+
+```{r results='hide'}
+ReadFiles <- function (testSet, prefix, cols = NULL) {
+    
+    if (is.null(cols)) cols = prefix
+    fileName <- paste(testSet, '/', prefix, '_', testSet, '.txt', sep = '')
+    
+    read.table(FullFileName(fileName),
+               col.names = cols,
+               colClasses = 'numeric')
+}
+
+```
+
+Therefore the results of calling the ReadTestAndTraining function is 
+
+```{r}
+
+df <- ReadTestAndTraining()
+head (df[1:4], 10)
+str (df[1:4])
+length(df)
+
+```
+
+Thus we can see that there are a total of 10,299 observations of 563 variables.
+
+###Extracting Mean and STD Measurements
+The ExtractMeanAndSD function, shown below modifies the the data frame so that it only retains the two identifying fields, subject and y, and fields with names containing .mean. or .std. 
+
+```{r results='hide'}
+ExtractMeanAndSD <- function(data) {
+    m.sd <- c('subject', 'y',
+              names(data[grep('\\.mean\\.', names(data))]),
+              names(data[grep('\\.std\\.', names(data))]))
+    
+    data[,m.sd]
+}
+```
+
+
+Using that to update our data frame reduces the number of fields available. 
+
+```{r}
+df.extracted <- ExtractMeanAndSD(df) 
+length(df)
+```
+
+You can see that we now only have `r length(df)` variables in our frame.  
+
+###Adding Descriptive Activity Names
+Currently all Activities are described by the column 'y'.  
+
+```{r}
+sample (df.extracted$y, 20, replace=FALSE)
+```
+
+which is not very useful.  These however can be mapped to the table of values in activity_labels.txt.  This is done with the function:
+
+```{r results='hide'}
+AddActivityNames <- function(data) {
+    
+    activities <- read.table(FullFileName('activity_labels.txt'), 
+                             colClasses = c('numeric', 'character'),
+                             col.names = c('Id', 'Name'),
+                             stringsAsFactors = FALSE)
+    ActivityName <- activities$Name[data$y]
+    cbind(ActivityName, data)
+}
+```
+
+By passing the df.extracted to this function, we add the descriptive activity labels to the data frame.
+
+
+```{r}
+df.named <- AddActivityNames(df.extracted)
+
+acts <- unique(df.named[,c('ActivityName', 'y')])
+acts[order(acts$ActivityName),]
+
+```
+
+
+###Labeling with Appropriate Variable Names
+
+Because my ReadFiles function, retained column names from the data when they were read, the requirements of this step were already met.
+
+The note in the (Discussion Form)[https://class.coursera.org/getdata-013/forum/thread?thread_id=30] confirms this. Under the question, "Is step 4 the same as step 3", the answer indicates:
+    
+    *the variable names (which at the moment are V1, V2, etc*  
+    
+
+but my variable names are come directly from the features.txt file. Here is a sample:  
+
+* `r sample(names(df.named), 5)` *
+
+
+###Creating the Independent, Tidy Data Set of Averages
+Producing the tidy dataset of averages is a complicated process. First, I create the new data frame from the combinations of activities/subjects available.  Then for each column in the dataset, I use the tapply to calculate the means based on the two factor variables. That results in a matrix that must be coerced back into a data frame and merged with the tidy data frame.
+
+The code for this is below:
+
+```{r results='hide'}
+CreateAverageDataset <- function(data) {
+
+    CurrColNames <- names(data[,4:length(data)])
+    FinalColNames <- c('ActivityName', 'subject')
+    
+    # Creates new data frame to hold tidy data
+    df <- unique(data[, c('ActivityName', 'subject')])
+    df <- df[order(df$subject, df$ActivityName),]
+
+    for (name in CurrColNames) {
+        
+        # Returns matrix of means for given column, 'name'
+        meanVals <- tapply(data[[name]], 
+                          INDEX = list(data$ActivityName, as.factor(data$subject)),
+                          mean)  
+            
+        # Converts matrix to data frame but loses column names
+        meanVals.df <- as.data.frame(as.table(meanVals)) 
+
+        # Combines new data frame with tidy data frame
+        df <- merge(df, 
+                   meanVals.df, 
+                   by.x = c('ActivityName', 'subject'), 
+                   by.y = c('Var1', 'Var2'), 
+                   all = T)
+        
+        # Restore column names 
+        FinalColNames <- c(FinalColNames, name)
+        names(df) <- FinalColNames
+    }
+    
+    # Reorder by suject and ActivityName
+    df <- df[order(df$subject, df$ActivityName),]
+}
+```
+
+The results can be seen by viewing a portion of the df.tidy dataset. 
+
+
+```{r}
+
+df.tidy <- CreateAverageDataset(df.named)
+head(df.tidy[1:5], 10)
+str(df.tidy[1:5])
+
+```
+
+
+Thus we see that the resulting tidy data set has 180 observations of 68 variables (including the identifiers, ActivityName, and subject).
+
+The final data set is saved in project directory as tidy.txt.  
+
+
+Thanks for your attention!  
+Bob Weiner
+
+
+
+
+

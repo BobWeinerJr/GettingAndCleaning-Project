@@ -1,0 +1,107 @@
+<style type="text/css">
+	table.tableizer-table {
+	border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	border-collapse;
+} 
+.tableizer-table td {
+	padding: 4px;
+	margin: 3px;
+	border: 1px solid #ccc;
+}
+.tableizer-table th {
+	background-color: #104E8B; 
+	color: #FFF;
+	font-weight: bold;
+}
+</style>
+
+<h1>Code Book</h1>
+
+This page defines the fields used in the tidy data set. 
+
+<h2>Identity Fields</h2>
+
+<table class="tableizer-table">
+	<tr class="tableizer-firstrow">
+		<th width="150px">Identity Fields</th>
+		<th>Meaning</th>
+	</tr>
+	<tr>
+		<td>ActivityName</td>
+		<td>Activity Performed by Subject</td>
+	</tr>
+	<tr>
+		<td>subject</td>
+		<td>Person observed</td>
+	</tr>
+</table>
+
+<h2>Data Fields</h2>
+
+<table class="tableizer-table">
+
+<tr class="tableizer-firstrow">
+	<th>Mean Values</th><th>Standard Deviations</th><th>FFT of Mean Values</th><th>FFT of Standard Deviations</th><th>Meaning</th>
+</tr>
+<tr>
+	<td>tBodyAcc.mean...X</td><td>tBodyAcc.std...X</td><td>fBodyAcc.mean...X</td><td>fBodyAcc.std...X</td><td rowspan="3">Body Accelaratoin</td>
+</tr>
+<tr>
+	<td>tBodyAcc.mean...Y</td><td>tBodyAcc.std...Y</td><td>fBodyAcc.mean...Y</td><td>fBodyAcc.std...Y</td>
+</tr>
+ <tr>
+	<td>tBodyAcc.mean...Z</td><td>tBodyAcc.std...Z</td><td>fBodyAcc.mean...Z</td><td>fBodyAcc.std...Z</td>
+</tr>
+ <tr>
+	<td>tGravityAcc.mean...X</td><td>tGravityAcc.std...X</td><td>&nbsp;</td><td>&nbsp;</td><td rowspan="3">Gravity Accelaration</td>
+</tr>
+ <tr>
+	<td>tGravityAcc.mean...Y</td><td>tGravityAcc.std...Y</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+ <tr>
+	<td>tGravityAcc.mean...Z</td><td>tGravityAcc.std...Z</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+ <tr>
+	<td>tBodyAccJerk.mean...X</td><td>tBodyAccJerk.std...X</td><td>fBodyAccJerk.mean...X</td><td>fBodyAccJerk.std...X</td><td rowspan="3">Accelaration Jerk</td>
+</tr>
+ <tr>
+	<td>tBodyAccJerk.mean...Y</td><td>tBodyAccJerk.std...Y</td><td>fBodyAccJerk.mean...Y</td><td>fBodyAccJerk.std...Y</td>
+</tr>
+ <tr>
+	<td>tBodyAccJerk.mean...Z</td><td>tBodyAccJerk.std...Z</td><td>fBodyAccJerk.mean...Z</td><td>fBodyAccJerk.std...Z</td>
+</tr>
+ <tr>
+	<td>tBodyGyro.mean...X</td><td>tBodyGyro.std...X</td><td>fBodyGyro.mean...X</td><td>fBodyGyro.std...X</td><td rowspan="3">Body Angular Accelaration</td>
+</tr>
+ <tr>
+	<td>tBodyGyro.mean...Y</td><td>tBodyGyro.std...Y</td><td>fBodyGyro.mean...Y</td><td>fBodyGyro.std...Y</td>
+</tr>
+ <tr>
+	<td>tBodyGyro.mean...Z</td><td>tBodyGyro.std...Z</td><td>fBodyGyro.mean...Z</td><td>fBodyGyro.std...Z</td>
+</tr>
+ <tr>
+	<td>tBodyGyroJerk.mean...X</td><td>tBodyGyroJerk.std...X</td><td>&nbsp;</td><td>&nbsp;</td><td rowspan="3">Body Angular Jerking</td>
+</tr>
+ <tr>
+	<td>tBodyGyroJerk.mean...Y</td><td>tBodyGyroJerk.std...Y</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+ <tr>
+	<td>tBodyGyroJerk.mean...Z</td><td>tBodyGyroJerk.std...Z</td><td>&nbsp;</td><td>&nbsp;</td>
+</tr>
+ <tr>
+	<td>tBodyAccMag.mean..</td><td>tBodyAccMag.std..</td><td>fBodyAccMag.mean..</td><td>fBodyAccMag.std..</td><td>Body Accelaration Magnitude</td>
+</tr>
+ <tr>
+	<td>tGravityAccMag.mean..</td><td>tGravityAccMag.std..</td><td>&nbsp;</td><td>&nbsp;</td><td>Gravity Accelaration Magnitude</td>
+</tr>
+ <tr>
+	<td>tBodyAccJerkMag.mean..</td><td>tBodyAccJerkMag.std..</td><td>fBodyBodyAccJerkMag.mean..</td><td>fBodyBodyAccJerkMag.std..</td><td>Body Jerk Accelaration Magnitude</td>
+</tr>
+ <tr>
+	<td>tBodyGyroMag.mean..</td><td>tBodyGyroMag.std..</td><td>fBodyBodyGyroMag.mean..</td><td>fBodyBodyGyroMag.std..</td><td>Body Angular Accelaration Magnitude</td>
+</tr>
+ <tr>
+	<td>tBodyGyroJerkMag.mean..</td><td>tBodyGyroJerkMag.std..</td><td>fBodyBodyGyroJerkMag.mean..</td><td>fBodyBodyGyroJerkMag.std..</td><td>Body Angular Jerk Magnitude</td>
+</tr>
+</table>
