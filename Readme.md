@@ -22,18 +22,18 @@ Activity labels are joined to the data frame using dplyr's inner_join function. 
 The column names are then adjusted using the advice given in the forum post, https://class.coursera.org/getdata-033/forum/thread?thread_id=126.  In this function, the names are lower-cased and the dots removed using the stringr functions str_to_lower and str_replace_all respectively. 
 
 **Note:** I personally find the new names very unreadable and must disagree with this advice though I acknowledge that disagreement over variable naming has been around as long as programming itself.  For what it is worth, my 2&#0162; on the subject is   
-1. Variable meanings should be understood intuitively at first glance.  
-2. You should never have to change variable names because you should never admit bad ones in the first place.   
+ 1.  Variable meanings should be understood intuitively at first glance.  
+ 2.  You should never have to change variable names because you should never admit bad ones in the first place.   
 
 Note my variables are named as they are read from the file (*thought I would have prefered ActivityId*). 
 
 ### 5. Creating a Tidy Data Set of Variable Averages
-To create the final, tidy dataset, I pipe the provided data frame through a series of dplyr functions.  The purpose of these are:
-1. select - remove the non-numeric column prior to applying the mean function  
-2. group_by - segment the data by activity and subject so that dplyr could aggregate each 
-3. summarise_each - apply the mean function to each column of the data set and aggregate the rows as specified above  
-4. arrange - sort the rows in logical order so that they are more human readable since they will be stored in a text file  
-5. inner_join - re-add the activity name column since it was removed above (note, not removing it is not really an option since it would have been convered to NA during aggregation)  
+To create the final, tidy dataset, I pipe the provided data frame through a series of dplyr functions.  The purpose of these are:  
+ 1.  select - remove the non-numeric column prior to applying the mean function  
+ 2.  group_by - segment the data by activity and subject so that dplyr could aggregate each 
+ 3.  summarise_each - apply the mean function to each column of the data set and aggregate the rows as specified above  
+ 4.  arrange - sort the rows in logical order so that they are more human readable since they will be stored in a text file  
+ 5.  inner_join - re-add the activity name column since it was removed above (note, not removing it is not really an option since it would have been convered to NA during aggregation)  
 
 Finally, the data frame is returned with the last column moved to the first - again, to make the text file more human readable.
 
