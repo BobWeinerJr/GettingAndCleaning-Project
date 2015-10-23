@@ -104,5 +104,6 @@ RunAll <- function() {
     df <- ApplyDescriptiveVariableNames(df)
     df.tidy <- AverageActivityAndSubject(df)
     write.table(df.tidy, 
-                file = str_c(baseDir, 'tidy.txt'))
+                file = str_c(baseDir, 'tidy.txt'),
+                row.names = FALSE)
 }
