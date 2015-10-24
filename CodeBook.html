@@ -1,15 +1,17 @@
 <style type="text/css">
-	tabletableizer-table {
+table.tableizer-table {
 	border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	border-collapse;
 } 
-tableizer-table td {
-	padding: 4px;
+table.tableizer-table tr td {
+	padding: 6px 6 6 12;
 	margin: 3px;
 	border: 1px solid #ccc;
 }
-tableizer-table th {
+table.tableizer-table tr th {
+	text-align: left;
+	padding: 6px 6px 6px 12px;
 	background-color: #104E8b; 
 	color: #FFF;
 	font-weight: bold;
@@ -46,7 +48,11 @@ This page defines the fields used in the tidy data set
 <table class="tableizer-table">
 
 <tr class="tableizer-firstrow">
-	<th>Mean Values</th><th>Standard Deviations</th><th>FFT of Mean Values</th><th>FFT of Standard Deviations</th><th>Meaning</th>
+	<th>Mean Values</th>
+	<th>Standard Deviations</th>
+	<th>FFT of Mean Values</th>
+	<th>FFT of Standard Deviations</th>
+	<th>Meaning</th>
 </tr>
 <tr>
 	<td>tbodyaccmeanx</td>
@@ -67,17 +73,19 @@ This page defines the fields used in the tidy data set
 	<td>fbodyaccmeanz</td>
 	<td>fbodyaccstdz</td>
 </tr>
+
+<!-- 4 -->
  <tr>
 	<td>tgravityaccmeanx</td>
 	<td>tgravityaccstdx</td>
-	<td>&nbsp;</td><td>&nbsp;</td>
+	<td colspan="2">&nbsp;</td>
 	<td rowspan="3">Gravity Accelaration</td>
 </tr>
  <tr>
-	<td>tgravityaccmeany</td><td>tgravityaccstdy</td><td>&nbsp;</td><td>&nbsp;</td>
+	<td>tgravityaccmeany</td><td>tgravityaccstdy</td><td colspan="2">&nbsp;</td>
 </tr>
  <tr>
-	<td>tgravityaccmeanz</td><td>tgravityaccstdz</td><td>&nbsp;</td><td>&nbsp;</td>
+	<td>tgravityaccmeanz</td><td>tgravityaccstdz</td><td colspan="2">&nbsp;</td>
 </tr>
  <tr>
 	<td>tbodyaccjerkmeanx</td><td>tbodyaccjerkstdx</td><td>fbodyaccjerkmeanx</td><td>fbodyaccjerkstdx</td><td rowspan="3">Accelaration Jerk</td>
@@ -98,19 +106,19 @@ This page defines the fields used in the tidy data set
 	<td>tbodygyromeanz</td><td>tbodygyrostdz</td><td>fbodygyromeanz</td><td>fbodygyrostdz</td>
 </tr>
  <tr>
-	<td>tbodygyrojerkmeanx</td><td>tbodygyrojerkstdx</td><td>&nbsp;</td><td>&nbsp;</td><td rowspan="3">Body Angular Jerking</td>
+	<td>tbodygyrojerkmeanx</td><td>tbodygyrojerkstdx</td><td colspan="2">&nbsp;</td><td rowspan="3">Body Angular Jerking</td>
 </tr>
  <tr>
-	<td>tbodygyrojerkmeany</td><td>tbodygyrojerkstdy</td><td>&nbsp;</td><td>&nbsp;</td>
+	<td>tbodygyrojerkmeany</td><td>tbodygyrojerkstdy</td><td colspan="2">&nbsp;</td>
 </tr>
  <tr>
-	<td>tbodygyrojerkmeanz</td><td>tbodygyrojerkstdz</td><td>&nbsp;</td><td>&nbsp;</td>
+	<td>tbodygyrojerkmeanz</td><td>tbodygyrojerkstdz</td><td colspan="2">&nbsp;</td>
 </tr>
  <tr>
 	<td>tbodyaccmagmean</td><td>tbodyaccmagstd</td><td>fbodyaccmagmean</td><td>fbodyaccmagstd</td><td>Body Accelaration Magnitude</td>
 </tr>
  <tr>
-	<td>tgravityaccmagmean</td><td>tgravityaccmagstd</td><td>&nbsp;</td><td>&nbsp;</td><td>Gravity Accelaration Magnitude</td>
+	<td>tgravityaccmagmean</td><td>tgravityaccmagstd</td><td colspan="2">&nbsp;</td><td>Gravity Accelaration Magnitude</td>
 </tr>
  <tr>
 	<td>tbodyaccjerkmagmean</td><td>tbodyaccjerkmagstd</td><td>fbodybodyaccjerkmagmean</td><td>fbodybodyaccjerkmagstd</td><td>Body Jerk Accelaration Magnitude</td>
